@@ -1,0 +1,106 @@
+﻿@model InventoryMS.Models.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Sales Dashboard";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4 text-primary">Sales Dashboard</h1>
+
+    <div class="row mb-3">
+        <div class="col text-end">
+            <a asp-action="TotalSales" class="btn btn-info btn-lg fw-bold">
+                <i class="bi bi-bar-chart"></i> Total Sales
+            </a>
+        </div>
+    </div>
+
+    <!-- Widgets / Info Cards -->
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary mb-3 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Today’s Sales</h5>
+                    <h2>@Model.TodaysSales.ToString("C")</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-success mb-3 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Transactions Today</h5>
+                    <h2>@Model.TransactionsToday</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-warning mb-3 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Products in Stock</h5>
+                    <h2>@Model.ProductsInStock</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-danger mb-3 shadow-sm">
+                <a asp-action="LowStockItems" class="text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Low Stock Items</h5>
+                        <h2>@Model.LowStockItems</h2>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inventory Table -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Inventory Table</h5>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Product ID</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Quantity</th>
+                                <th>Selling Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var product in Model.Inventory)
+                            {
+                                <tr>
+                                    <td>@product.Id</td>
+                                    <td>@product.Name</td>
+                                    <td>@product.Category</td>
+                                    <td>@product.Quantity</td>
+                                    <td>@product.SellingPrice.ToString("C")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity Feed -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Recent Activity</h5>
+                    <ul class="list-group">
+                        @foreach (var activity in Model.RecentActivity)
+                        {
+                            <li class="list-group-item">@activity</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

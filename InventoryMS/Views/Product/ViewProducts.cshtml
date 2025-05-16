@@ -1,0 +1,45 @@
+﻿@model IEnumerable<InventoryMS.Models.Product>
+
+@{
+    ViewData["Title"] = "View Products";
+}
+
+<h1>View Products</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Product Title</th>
+            <th>Selling Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Title</td>
+                    <td>@product.SellingPrice.ToString("C")</td>
+                    <td>
+                        <a asp-controller="Product" asp-action="EditProduct" asp-route-id="@product.Id" class="badge bg-primary text-decoration-none">
+                            Edit
+                        </a>
+                        <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id" class="badge bg-danger text-decoration-none">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4" class="text-center">No products available.</td>
+            </tr>
+        }
+    </tbody>
+</table>

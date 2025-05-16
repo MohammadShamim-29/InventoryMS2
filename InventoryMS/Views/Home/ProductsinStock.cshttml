@@ -1,0 +1,6 @@
+﻿namespace InventoryMS.Views.Home
+{
+    public class ProductsinStock
+    {
+    }
+}

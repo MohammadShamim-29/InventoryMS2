@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Total Sales";
+    var dailyTotals = ViewBag.DailyTotals as IEnumerable<dynamic>;
+}
+
+<div class="container mt-5">
+    <h1 class="mb-4 text-primary">Total Sales (Daily & Per Product)</h1>
+    @if (dailyTotals != null && dailyTotals.Any())
+    {
+        foreach (var day in dailyTotals)
+        {
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Date: @day.Date.ToShortDateString() | Total: @day.TotalAmount.ToString("C")</h5>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity Sold</th>
+                                <th>Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var prod in day.Products)
+                            {
+                                <tr>
+                                    <td>@prod.ProductName</td>
+                                    <td>@prod.TotalQuantity</td>
+                                    <td>@prod.TotalAmount.ToString("C")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="alert alert-info">No sales data available.</div>
+    }
+</div>

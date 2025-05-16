@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "View Sales";
+}
+
+<h1>View Sales</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.Sales != null)
+        {
+            foreach (var sale in ViewBag.Sales)
+            {
+                <tr>
+                    <td>@sale.Id</td>
+                    <td>@sale.ProductTitle</td>
+                    <td>@sale.Quantity</td>
+                    <td>@sale.SaleDate.ToShortDateString()</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4" class="text-center">No sales available.</td>
+            </tr>
+        }
+    </tbody>
+</table>

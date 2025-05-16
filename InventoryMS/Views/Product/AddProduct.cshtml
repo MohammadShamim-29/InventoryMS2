@@ -1,0 +1,19 @@
+﻿@model InventoryMS.Models.Product
+
+@{
+    ViewData["Title"] = "Add Product";
+}
+
+<h1>Add Product</h1>
+
+<form method="post" asp-action="AddProduct">
+    <div class="mb-3">
+        <label for="productTitle" class="form-label">Product Title</label>
+        <input type="text" class="form-control" id="productTitle" name="Title" placeholder="Enter product title" required />
+    </div>
+    <div class="mb-3">
+        <label for="sellingPrice" class="form-label">Selling Price</label>
+        <input type="number" class="form-control" id="sellingPrice" name="SellingPrice" placeholder="Enter selling price" step="0.01" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Add Product</button>
+</form>

@@ -1,0 +1,22 @@
+@model InventoryMS.Models.Product
+
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<h1>Edit Product</h1>
+
+<form method="post" asp-action="EditProduct">
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label for="productTitle" class="form-label">Product Title</label>
+        <input type="text" class="form-control" id="productTitle" asp-for="Title" required />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label for="sellingPrice" class="form-label">Selling Price</label>
+        <input type="number" class="form-control" id="sellingPrice" asp-for="SellingPrice" step="0.01" required />
+        <span asp-validation-for="SellingPrice" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>

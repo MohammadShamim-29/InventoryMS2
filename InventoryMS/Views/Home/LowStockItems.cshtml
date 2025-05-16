@@ -1,0 +1,29 @@
+﻿@model IEnumerable<InventoryMS.Models.InventoryItem>
+
+@{
+    ViewData["Title"] = "Low Stock Items";
+}
+
+<h1>Low Stock Items</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Selling Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Quantity</td>
+                <td>@product.SellingPrice.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>

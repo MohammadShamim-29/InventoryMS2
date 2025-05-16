@@ -1,0 +1,36 @@
+﻿@model InventoryMS.Models.AddSaleModel
+
+@{
+    ViewData["Title"] = "Add Sale";
+}
+
+<h1>Add Sale</h1>
+
+<form method="post" asp-action="AddSale">
+    <div class="mb-3">
+        <label for="saleProduct" class="form-label">Product</label>
+        <select class="form-control" id="saleProduct" asp-for="ProductId" required>
+            <option value="">Select a product</option>
+            @foreach (var product in ViewBag.Products)
+            {
+                <option value="@product.Id">@product.Title (@product.Quantity in stock)</option>
+            }
+        </select>
+        <span asp-validation-for="ProductId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label for="saleQuantity" class="form-label">Quantity</label>
+        <input type="number" class="form-control" id="saleQuantity" asp-for="Quantity" placeholder="Enter quantity sold" required />
+        <span asp-validation-for="Quantity" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label for="saleDate" class="form-label">Date</label>
+        <input type="date" class="form-control" id="saleDate" asp-for="SaleDate" required />
+        <span asp-validation-for="SaleDate" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Sale</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

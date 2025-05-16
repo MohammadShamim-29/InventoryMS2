@@ -1,0 +1,41 @@
+@model InventoryMS.Models.AddPurchaseModel
+
+@{
+    ViewData["Title"] = "Add Purchase";
+}
+
+<h1>Add Purchase</h1>
+
+<form method="post" asp-action="AddPurchase">
+    <div class="mb-3">
+        <label for="purchaseProduct" class="form-label">Product</label>
+        <select class="form-control" id="purchaseProduct" asp-for="ProductId" required>
+            <option value="">Select a product</option>
+            @foreach (var product in ViewBag.Products)
+            {
+                <option value="@product.Id">@product.Title</option>
+            }
+        </select>
+        <span asp-validation-for="ProductId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label for="purchaseQuantity" class="form-label">Quantity</label>
+        <input type="number" class="form-control" id="purchaseQuantity" asp-for="Quantity" placeholder="Enter quantity purchased" required />
+        <span asp-validation-for="Quantity" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label for="purchasePrice" class="form-label">Purchase Price</label>
+        <input type="number" class="form-control" id="purchasePrice" asp-for="PurchasePrice" placeholder="Enter purchase price" step="0.01" required />
+        <span asp-validation-for="PurchasePrice" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label for="purchaseDate" class="form-label">Date</label>
+        <input type="date" class="form-control" id="purchaseDate" asp-for="PurchaseDate" required />
+        <span asp-validation-for="PurchaseDate" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Purchase</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
